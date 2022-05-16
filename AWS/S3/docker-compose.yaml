@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  terraform:
+    image: hashicorp/terraform:latest
+    volumes:
+      - .:/code
+      - ~/.aws:/root/.aws
+    working_dir: /code
+
+  aws:
+    image: amazon/aws-cli
+    volumes:
+      - .:/code
+      - ~/.aws:/root/.aws
+    restart: "no"
+    working_dir: /code
+    entrypoint: aws
+    environment:
+      AWS_PROFILE: terraform-operator
