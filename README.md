@@ -3,5 +3,5 @@ Terraform examples
 
 
 # PoC List
-* [GCP](./gcp/README.md)
-* [AWS](./aws/README.md)
+* [GCP](./GCP/README.md)
+* [AWS](./AWS/README.md)
