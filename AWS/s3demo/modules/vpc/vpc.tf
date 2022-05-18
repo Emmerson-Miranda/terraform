@@ -32,10 +32,11 @@ module "vpc" {
 
 resource "aws_vpc_endpoint" "s3" {
   vpc_id       = module.vpc.vpc_id
-  vpc_endpoint_type = "Gateway"
-  service_name = "com.amazonaws.${var.region}.s3"
+  vpc_endpoint_type = "Interface"
+  //service_name = "com.amazonaws.${var.region}.s3"
+  service_name = "com.amazonaws.s3-global.accesspoint"
 
-  //subnet_ids          = data.aws_subnets.list.ids //Subnet IDs are only supported for Interface and GatewayLoadBalancer type VPC Endpoints.
+  subnet_ids          = data.aws_subnets.list.ids //Subnet IDs are only supported for Interface and GatewayLoadBalancer type VPC Endpoints.
   private_dns_enabled = false
 
    policy = jsonencode({
