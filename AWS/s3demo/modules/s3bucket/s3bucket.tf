@@ -1,9 +1,5 @@
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/version-4-upgrade
 
-resource "aws_kms_key" "mykey" {
-  description             = "This key is used to encrypt bucket objects"
-  deletion_window_in_days = 10
-}
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.name
@@ -26,18 +22,29 @@ resource "aws_s3_bucket_versioning" "myversioning" {
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "myencryption" {
+# Upload an object 1
+resource "aws_s3_object" "object1" {
   bucket = aws_s3_bucket.bucket.id
-
-  rule {
-    apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.mykey.arn
-      sse_algorithm     = "aws:kms"
-    }
-  }
+  key    = "project1/README.md"
+  acl    = "public-read"  
+  content = "This is readme from project1"
 }
 
-resource "aws_s3_access_point" "myaccesspoint" {
+# Upload an object 2
+resource "aws_s3_object" "object2" {
   bucket = aws_s3_bucket.bucket.id
-  name   = "${var.name}-myaccesspoint"
+  key    = "project2/README.md"
+  acl    = "public-read"  
+  content = "This is readme from project2"
+}
+
+
+resource "aws_s3_access_point" "project1" {
+  bucket = aws_s3_bucket.bucket.id
+  name   = "project1"
+}
+
+resource "aws_s3_access_point" "project2" {
+  bucket = aws_s3_bucket.bucket.id
+  name   = "project2"
 }

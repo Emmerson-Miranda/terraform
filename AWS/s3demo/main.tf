@@ -134,7 +134,7 @@ module "client_sts" {
 */
 
 
-/*
+
 module "s3-bucket-demo-emm" {
   source     = "./modules/s3bucket"
   name       = var.bucket_name
@@ -142,5 +142,4 @@ module "s3-bucket-demo-emm" {
   aws_profle = var.aws_profle
 }
 
-*/
 
