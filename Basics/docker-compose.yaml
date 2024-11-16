@@ -1,0 +1,7 @@
+services:
+
+  terraform:
+    image: hashicorp/terraform:latest
+    volumes:
+      - .:/code
+    working_dir: /code
