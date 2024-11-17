@@ -11,7 +11,11 @@ docker compose run --rm terraform version
 ```bash
 docker compose run --rm terraform  -chdir=./01_local_file init
 docker compose run --rm terraform  -chdir=./01_local_file apply 
+
 ls ./01_local_file/tmp
+docker compose run --rm terraform  -chdir=./02_variables output
+docker compose run --rm terraform  -chdir=./02_variables output myuuid
+
 docker compose run --rm terraform  -chdir=./01_local_file destroy 
 ```
 
@@ -80,6 +84,20 @@ rm  02_variables/myvariable.auto.tfvars
 docker compose run --rm terraform  -chdir=./02_variables destroy 
 ```
 
+## 03 Resource Dependencies
+
+To make reference to another resource use `${resource_type.resource_name.property_name}` (Implicit dependency)
+
+Explicit dependency is when one resource depends_on another without use any of its attributes, it requires use the keyword `depends_on`.
+
+```bash
+docker compose run --rm terraform  -chdir=./03_resource_dependencies init
+docker compose run --rm terraform  -chdir=./03_resource_dependencies apply 
+cat 03_resource_dependencies/tmp/time.txt
+docker compose run --rm terraform  -chdir=./03_resource_dependencies destroy 
+```
+
+
 ## Documentation
 
 * [local_file (Resource)](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
@@ -87,4 +105,6 @@ docker compose run --rm terraform  -chdir=./02_variables destroy
 * [Switching working directory with -chdir](https://developer.hashicorp.com/terraform/cli/commands#switching-working-directory-with-chdir)
 
 * [Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
+
+* [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key)
 
