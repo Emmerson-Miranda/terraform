@@ -98,6 +98,30 @@ docker compose run --rm terraform  -chdir=./03_resource_dependencies destroy
 ```
 
 
+## 04 Data sources
+
+Read information from different datasources (see provider docs) and make the info available to terraform code.
+
+Resource type `data`.
+
+```bash
+docker compose run --rm terraform  -chdir=./04_data init
+docker compose run --rm terraform  -chdir=./04_data apply 
+docker compose run --rm terraform  -chdir=./04_data destroy 
+```
+
+
+## 05 Meta Arguments
+
+Loops over lists and maps.
+
+```bash
+docker compose run --rm terraform  -chdir=./05_meta_arguments init
+docker compose run --rm terraform  -chdir=./05_meta_arguments apply 
+docker compose run --rm terraform  -chdir=./05_meta_arguments destroy 
+```
+
+
 ## Documentation
 
 * [local_file (Resource)](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
@@ -107,4 +131,6 @@ docker compose run --rm terraform  -chdir=./03_resource_dependencies destroy
 * [Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
 
 * [tls_private_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key)
+
+* [Data sources](https://developer.hashicorp.com/terraform/language/data-sources)
 

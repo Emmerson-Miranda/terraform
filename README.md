@@ -4,6 +4,8 @@ Terraform examples.
 
 ## Terraform state
 
+JSON format file. You can inspect the JSON file or run `terraform show`. Contains sensitive information so is not recommended use it in source code repositories.
+
 Maps the desired state defined in configuration files to the actual state of resources in your infrastructure.
 
 ```mermaid
