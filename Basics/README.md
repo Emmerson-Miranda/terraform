@@ -121,6 +121,42 @@ docker compose run --rm terraform  -chdir=./05_meta_arguments apply
 docker compose run --rm terraform  -chdir=./05_meta_arguments destroy 
 ```
 
+## 06 Mocking AWS (WIP)
+
+Use localstack to mock AWS.
+
+```bash
+docker network create localstack-shared-network
+
+docker compose -f docker-compose-localstack.yaml up
+
+docker compose -f docker-compose-localstack.yaml up
+
+docker compose run --rm terraform  -chdir=./06_aws init
+```
+
+## 07 Workspaces
+
+Hint: you can use `terraform console` to test the expressions.
+
+Creating workspaces.
+
+```bash
+
+docker compose run --rm terraform  -chdir=./07_workspaces workspace new projectA
+
+docker compose run --rm terraform  -chdir=./07_workspaces workspace new projectB
+
+docker compose run --rm terraform  -chdir=./07_workspaces workspace list
+
+docker compose run --rm terraform  -chdir=./07_workspaces workspace select projectB
+```
+
+Check the values to be generated
+
+```bash
+docker compose run --rm terraform  -chdir=./07_workspaces plan 
+```
 
 ## Documentation
 
